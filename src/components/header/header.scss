@@ -1,0 +1,32 @@
+// Importez vos styles globaux
+@import "../../styles/styles.scss";
+
+header {
+  display: flex;
+  flex-shrink: 0; // Ne pas réduire la taille du header
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 18px 80px 18px 25px;
+  background-color: $backgroundHeaderNav;
+
+  img {
+    width: 210.32px;
+    height: 68px;
+  }
+
+  // Styles pour NavLink
+  a {
+    color: $navFrontcolor;
+    text-decoration: none;
+    font-size: 24px;
+
+    &.active {
+      text-decoration: underline; // Soulignez le texte lorsque le lien est actif
+    }
+
+    &.pending {
+      text-decoration: none;
+    }
+  }
+}
