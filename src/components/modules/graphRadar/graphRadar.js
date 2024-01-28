@@ -1,78 +1,86 @@
-// graphActiviteQuotidienne.js
 import React from "react";
 import {
-  ResponsiveContainer,
-  Legend,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
   Radar,
   RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
+  ResponsiveContainer,
+  Text, // Importez la composante Text depuis recharts
 } from "recharts";
 import "./graphRadar.scss";
 
 const data = [
   {
-    subject: "Math",
+    subject: "Intensité",
     A: 120,
-    B: 110,
     fullMark: 150,
   },
   {
-    subject: "Chinese",
+    subject: "Vitesse",
     A: 98,
-    B: 130,
     fullMark: 150,
   },
   {
-    subject: "English",
+    subject: "Force",
     A: 86,
-    B: 130,
     fullMark: 150,
   },
   {
-    subject: "Geography",
+    subject: "Endurance",
     A: 99,
-    B: 100,
     fullMark: 150,
   },
   {
-    subject: "Physics",
+    subject: "Energie",
     A: 85,
-    B: 90,
     fullMark: 150,
   },
   {
-    subject: "History",
+    subject: "Cardio",
     A: 65,
-    B: 85,
     fullMark: 150,
   },
 ];
 
+// Fonction pour personnaliser le rendu de l'axe des angles polaires
+function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
+  return (
+    <Text
+      {...rest}
+      verticalAnchor="middle"
+      y={y + (y - cy) / 8}
+      x={x + (x - cx) / 8}
+    >
+      {payload.value}
+    </Text>
+  );
+}
+
 const renderBarChart = (
-  <ResponsiveContainer width="100%" height="100%">
-    <RadarChart outerRadius={90} width={730} height={250} data={data}>
-      <PolarGrid />
-      <PolarAngleAxis dataKey="subject" />
-      <PolarRadiusAxis angle={30} domain={[0, 150]} />
-      <Radar
-        name="Mike"
-        dataKey="A"
-        stroke="#8884d8"
-        fill="#8884d8"
-        fillOpacity={0.6}
-      />
-      <Radar
-        name="Lily"
-        dataKey="B"
-        stroke="#82ca9d"
-        fill="#82ca9d"
-        fillOpacity={0.6}
-      />
-      <Legend />
-    </RadarChart>
-  </ResponsiveContainer>
+  <div className="radar">
+    <ResponsiveContainer width="100%" height="100%">
+      <RadarChart outerRadius={90} data={data} radius={150}>
+        <PolarGrid radialLines={false} />
+        {/* Utilisation de la fonction personnalisée pour le rendu de l'axe des angles polaires */}
+        <PolarAngleAxis
+          dataKey="subject"
+          stroke="none"
+          tickFormatter={(value) => `${value}    `}
+          tickLine={false} // Désactiver les lignes de ticks
+          axisLine={false} // Désactiver la ligne d'axe
+          tick={renderPolarAngleAxis} // Utilisation de la fonction personnalisée
+        />
+        <PolarRadiusAxis angle={30} radialLines={false} stroke="none" />
+        <Radar
+          dataKey="A"
+          stroke="#FF0101B2"
+          fill="#FF0101B2"
+          fillOpacity={0.6}
+        />
+      </RadarChart>
+    </ResponsiveContainer>
+  </div>
 );
 
 const GraphActiviteQuotidienne = () => {

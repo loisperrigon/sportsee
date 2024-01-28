@@ -1,0 +1,31 @@
+.graphObjectif {
+  position: relative;
+  background-color: #fbfbfb;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+
+  &__titre {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    &__pourcentage {
+      font-weight: bold;
+      font-size: 30px;
+      color: #282d30;
+    }
+    &__objectif {
+      font-size: 16px;
+      width: auto;
+      color: #74798c;
+    }
+  }
+  &__score {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    color: #20253a;
+    font-size: 36px;
+  }
+}

@@ -44,15 +44,11 @@ const Profil = () => {
                 <GraphActiviteQuotidienne />
               </div>
               <div className="profil__informations__graphiques__others">
-                <div className="profil__informations__graphiques__dureesSessions">
-                  <GraphDureesSessions />
-                </div>
-                <div className="profil__informations__graphiques__radar">
-                  <GraphRadar />
-                </div>
-                <div className="profil__informations__graphiques__Objectif">
-                  <GraphObjectif />
-                </div>
+                <GraphDureesSessions />
+
+                <GraphRadar />
+
+                <GraphObjectif />
               </div>
             </div>
             <div className="profil__informations__infoNutritionelles">
