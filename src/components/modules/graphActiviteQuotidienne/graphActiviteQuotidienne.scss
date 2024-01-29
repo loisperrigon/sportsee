@@ -1,0 +1,50 @@
+.graphActiviteQuotidienne {
+  width: 100%;
+
+  .custom-tooltip-activiteQuotidienne {
+    background-color: red;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .custom-legend-activiteQuotidienne {
+    display: flex;
+    color: #74798c;
+    font-size: 15px;
+    width: 100%;
+    justify-content: space-between;
+    .titleActiviteQuotidiennePoint {
+      font-size: 24px;
+      color: #20253a;
+    }
+    .donneesActiviteQuotidiennePoint {
+      display: flex;
+      gap: 30px;
+      padding-right: 90px;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .poidsActiviteQuotidiennePoint,
+        .caloriesActiviteQuotidiennePoint {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+
+        .poidsActiviteQuotidiennePoint {
+          background-color: #282d30;
+        }
+
+        .caloriesActiviteQuotidiennePoint {
+          background-color: #e60000;
+        }
+      }
+    }
+  }
+}

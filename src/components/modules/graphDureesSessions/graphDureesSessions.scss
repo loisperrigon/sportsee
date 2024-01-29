@@ -9,4 +9,22 @@
   .recharts-surface {
     border-radius: 15px;
   }
+
+  .custom-tooltip {
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 700;
+  }
+
+  .custom-legend {
+    color: white;
+    position: absolute;
+    p {
+      width: 120px;
+      position: relative;
+      top: 10px;
+      left: 10px;
+    }
+  }
 }

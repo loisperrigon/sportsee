@@ -40,9 +40,8 @@ const Profil = () => {
           </div>
           <div className="profil__informations">
             <div className="profil__informations__graphiques">
-              <div className="profil__informations__graphiques__activiteQuotidienne">
-                <GraphActiviteQuotidienne />
-              </div>
+              <GraphActiviteQuotidienne />
+
               <div className="profil__informations__graphiques__others">
                 <GraphDureesSessions />
 

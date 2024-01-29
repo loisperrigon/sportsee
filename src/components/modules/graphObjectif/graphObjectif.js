@@ -16,7 +16,7 @@ const GraphObjectif = ({ objectif = 80 }) => {
         <p class="graphObjectif__titre__objectif">de votre objectif</p>
       </div>
       <p className="graphObjectif__score">Score</p>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" minWidth={300}>
         <PieChart>
           <Pie
             data={data}

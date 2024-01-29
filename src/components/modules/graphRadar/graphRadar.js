@@ -49,8 +49,8 @@ function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     <Text
       {...rest}
       verticalAnchor="middle"
-      y={y + (y - cy) / 8}
-      x={x + (x - cx) / 8}
+      y={y + (y - cy) / 128}
+      x={x + (x - cx) / 128}
     >
       {payload.value}
     </Text>
@@ -59,7 +59,7 @@ function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
 
 const renderBarChart = (
   <div className="radar">
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" minWidth={300}>
       <RadarChart outerRadius={90} data={data} radius={150}>
         <PolarGrid radialLines={false} />
         {/* Utilisation de la fonction personnalisée pour le rendu de l'axe des angles polaires */}

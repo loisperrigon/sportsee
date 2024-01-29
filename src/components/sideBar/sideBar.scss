@@ -3,7 +3,7 @@
 .sideBar {
   position: relative;
   width: 117px;
-  height: 100%;
+  flex: 0, 1;
   background-color: $backgroundHeaderNav;
   display: grid;
   grid-template-rows: repeat(

@@ -1,11 +1,10 @@
 // graphActiviteQuotidienne.js
 import React from "react";
 import {
-  ResponsiveContainer,
   Bar,
   BarChart,
-  CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -14,54 +13,113 @@ import "./graphActiviteQuotidienne.scss";
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
+    name: "1",
+    uv: 40,
+    pv: 24,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
+    name: "2",
+    uv: 30,
+    pv: 13,
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
+    name: "3",
+    uv: 20,
+    pv: 98,
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
+    name: "4",
+    uv: 27,
+    pv: 39,
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
+    name: "5",
+    uv: 18,
+    pv: 48,
   },
   {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
+    name: "6",
+    uv: 23,
+    pv: 38,
   },
   {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
+    name: "7",
+    uv: 34,
+    pv: 43,
+  },
+  {
+    name: "8",
+    uv: 34,
+    pv: 43,
+  },
+  {
+    name: "9",
+    uv: 34,
+    pv: 43,
+  },
+  {
+    name: "10",
+    uv: 34,
+    pv: 43,
+  },
+  {
+    name: "11",
+    uv: 34,
+    pv: 43,
   },
 ];
 
+const maxUvValue = Math.max(...data.map((item) => item.pv));
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip-activiteQuotidienne">
+        <p className="label">{`${payload[0].value}Kg`}</p>
+        <p className="label">{`${payload[1].value}Kcal`}</p>
+      </div>
+    );
+  }
+};
+
+const renderLegend = () => {
+  return (
+    <div className="custom-legend-activiteQuotidienne">
+      <p className="titleActiviteQuotidiennePoint">Activite quotidienne</p>
+      <div className="donneesActiviteQuotidiennePoint">
+        <div>
+          <div className="poidsActiviteQuotidiennePoint"></div>
+          <p className="poidsActiviteQuotidienne">Poids (kg)</p>
+        </div>
+        <div>
+          <div className="caloriesActiviteQuotidiennePoint"></div>
+          <p className="caloriesActiviteQuotidienne">Calories brûlées (kCal)</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const renderBarChart = (
-  <ResponsiveContainer width="100%" height="100%">
-    <BarChart data={data}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#8884d8" />
-      <Bar dataKey="uv" fill="#82ca9d" />
-    </BarChart>
-  </ResponsiveContainer>
+  <div className="graphActiviteQuotidienne">
+    <ResponsiveContainer width={"100%"}>
+      <BarChart height="400" data={data} maxBarSize={10} barGap={"-25%"}>
+        <XAxis dataKey="name" axisLine={false} tickLine={false} />
+        <YAxis // Ajoutez le composant YAxis avec la propriété domain
+          domain={["dataMin - 1", "dataMax + 1"]}
+          orientation="right"
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={(value) => (value > 0.95 * maxUvValue ? "" : value)}
+          tickCount={5}
+        />
+        <Tooltip content={<CustomTooltip />} />
+        <Legend verticalAlign="top" align="left" content={renderLegend} />
+        <Bar dataKey="pv" fill="#282D30" radius={[10, 10, 0, 0]} />
+        <Bar dataKey="uv" fill="#E60000" radius={[10, 10, 0, 0]} />
+      </BarChart>
+    </ResponsiveContainer>
+  </div>
 );
 
 const GraphActiviteQuotidienne = () => {
