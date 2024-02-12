@@ -4,12 +4,12 @@
 .sideBarProfil {
   display: flex;
   flex: 1;
+  flex-grow: 1;
 
   .profil {
     display: flex;
-    flex-direction: column;
     flex: 1;
-    height: 100%;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 25px 25px 25px 25px;
     gap: 50px;
@@ -34,15 +34,14 @@
     }
 
     &__informations {
-      display: grid;
-      grid-template-columns: 6fr 1fr;
-      flex: 1;
+      display: flex;
+      flex-grow: 1;
 
       &__graphiques {
         display: grid;
         grid-template-rows: 1fr 1fr;
-
         gap: 40px;
+        flex: 6;
 
         &__activiteQuotidienne {
           display: flex;
@@ -77,6 +76,7 @@
 
       &__infoNutritionelles {
         display: flex;
+        flex: 1;
         flex-direction: column;
         justify-content: center;
         align-items: center;

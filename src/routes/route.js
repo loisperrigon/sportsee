@@ -6,7 +6,7 @@ import Profil from "../Pages/profil";
 
 const routerConfig = [
   {
-    path: "/profil",
+    path: "/profil/:id",
     element: (
       <>
         <Profil />

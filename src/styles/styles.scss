@@ -1,15 +1,2 @@
 @import "./_variables.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body,
-html,
-#root {
-  display: flex;
-  height: 100%;
-  flex: 1;
-  flex-direction: column;
-}
+@import "./reset.scss";

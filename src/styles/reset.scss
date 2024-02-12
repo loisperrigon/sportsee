@@ -1,0 +1,38 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Remove margin and padding */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+figure,
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+/* Set default font family */
+body {
+  font-family: Roboto, sans-serif;
+}
+
+/* Ensure full height of the content area */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}

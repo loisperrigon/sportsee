@@ -3,7 +3,6 @@
 
 header {
   display: flex;
-  flex-shrink: 0; // Ne pas réduire la taille du header
   justify-content: space-between;
   align-items: center;
   flex-direction: row;

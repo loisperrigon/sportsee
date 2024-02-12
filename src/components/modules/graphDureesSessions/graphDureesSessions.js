@@ -13,47 +13,6 @@ import {
 
 import "./graphDureesSessions.scss";
 
-let data = [
-  {
-    name: "L",
-
-    pv: 2400,
-  },
-  {
-    name: "M",
-
-    pv: 3098,
-  },
-  {
-    name: "M",
-
-    pv: 5000,
-  },
-  {
-    name: "J",
-
-    pv: 3908,
-  },
-  {
-    name: "V",
-
-    pv: 4800,
-  },
-  {
-    name: "S",
-
-    pv: 3800,
-  },
-  {
-    name: "D",
-
-    pv: 4300,
-  },
-];
-
-data.unshift({ name: "", pv: data[data.length - 1].pv });
-data.push({ name: "", pv: data[data.length - 1].pv });
-
 const CustomCursor = (props) => {
   const { points, width, height, stroke } = props;
   const { x, y } = points[0];
@@ -73,9 +32,7 @@ const CustomCursor = (props) => {
 };
 
 const renderTooltipContent = (data) => {
-  if (data.payload.length > 0 && data.payload[0].payload.name !== "") {
-    // Accéder à la valeur dans le premier élément du tableau payload
-    console.log(data.payload[0].payload.name);
+  if (data.payload.length > 0 && data.payload[0].payload.day !== "") {
     const value = data.payload[0].value;
 
     // Formater et afficher la valeur
@@ -97,43 +54,58 @@ const renderLegend = () => {
   );
 };
 
-const renderBarChart = (
-  <div className="dureeSessions">
-    <ResponsiveContainer width="100%" minWidth={300}>
-      <LineChart
-        data={data}
-        height="400"
-        margin={{ top: 0, right: 0, left: 0, bottom: -40 }}
-      >
-        <XAxis
-          dataKey="name"
-          axisLine={false}
-          tickLine={false}
-          tick={{ fill: "#FFFFFF" }}
-          dy={-40}
-        />
-        <YAxis // Ajoutez le composant YAxis avec la propriété domain
-          domain={[-1000, 12000]}
-          hide={true} // Remplacez 15000 par la valeur maximale souhaitée du graph
-        />
+const GraphActiviteQuotidienne = ({ data }) => {
+  const formatedDataGraph = [
+    {
+      day: "",
+      sessionLength: data.sessions[data.sessions.length - 1].sessionLength,
+    },
+    ...data.sessions,
+    {
+      day: "",
+      sessionLength: data.sessions[data.sessions.length - 1].sessionLength,
+    },
+  ];
 
-        <Tooltip cursor={<CustomCursor />} content={renderTooltipContent} />
+  const maxSession = data.sessions.reduce(
+    (max, item) => Math.max(item.sessionLength, max),
+    -Infinity
+  );
 
-        <Line
-          type="monotone"
-          dataKey="pv"
-          stroke="#FFFFFF"
-          strokeWidth={3}
-          dot={false}
-        />
-        <Legend verticalAlign="top" align="left" content={renderLegend} />
-      </LineChart>
-    </ResponsiveContainer>
-  </div>
-);
+  return (
+    <div className="dureeSessions">
+      <ResponsiveContainer width="100%" minWidth={300}>
+        <LineChart
+          data={formatedDataGraph}
+          height="400"
+          margin={{ top: 0, right: 0, left: 0, bottom: -40 }}
+        >
+          <XAxis
+            dataKey="day"
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: "#FFFFFF" }}
+            dy={-40}
+          />
+          <YAxis // Ajoutez le composant YAxis avec la propriété domain
+            domain={[-25, maxSession + 25]}
+            hide={true} // Remplacez 15000 par la valeur maximale souhaitée du graph
+          />
 
-const GraphActiviteQuotidienne = () => {
-  return renderBarChart;
+          <Tooltip cursor={<CustomCursor />} content={renderTooltipContent} />
+
+          <Line
+            type="monotone"
+            dataKey="sessionLength"
+            stroke="#FFFFFF"
+            strokeWidth={3}
+            dot={false}
+          />
+          <Legend verticalAlign="top" align="left" content={renderLegend} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
 };
 
 export default GraphActiviteQuotidienne;
