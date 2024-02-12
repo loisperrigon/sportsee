@@ -1,7 +1,6 @@
 import axios from "axios";
-const mockData = "";
 
-const BASE_URL = "http://localhost:3000/"; // Remplacez cela par l'URL de votre API
+const BASE_URL = "http://localhost:3000";
 
 const Api = {
   getProfilData: async (endpoint) => {

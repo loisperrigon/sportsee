@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import Api from "../services/fakeApi.js";
-//import Api from "../services/api.js";
+//import Api from "../services/fakeApi.js";
+import Api from "../services/api.js";
 import {
   formatActivityData,
   formatAverageSessionsData,
@@ -39,20 +39,22 @@ const Profil = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reponseProfil = await Api.getProfilData(`users/${id}`);
-        const reponseActivity = await Api.getProfilData(`users/${id}/activity`);
+        const reponseProfil = await Api.getProfilData(`user/${id}`);
+        const reponseActivity = await Api.getProfilData(`user/${id}/activity`);
         const reponsePerformance = await Api.getProfilData(
-          `users/${id}/performance`
+          `user/${id}/performance`
         );
         const reponseAverageSessions = await Api.getProfilData(
-          `users/${id}/average-sessions`
+          `user/${id}/average-sessions`
         );
 
         setData({
-          profil: formatProfilData(reponseProfil),
-          activity: formatActivityData(reponseActivity),
-          performance: formatPerformanceData(reponsePerformance),
-          averageSessions: formatAverageSessionsData(reponseAverageSessions),
+          profil: formatProfilData(reponseProfil.data),
+          activity: formatActivityData(reponseActivity.data),
+          performance: formatPerformanceData(reponsePerformance.data),
+          averageSessions: formatAverageSessionsData(
+            reponseAverageSessions.data
+          ),
         });
       } catch (error) {
         // Gérer les erreurs

@@ -1,11 +1,11 @@
 export const formatProfilData = (profilData) => {
-  const lastName = profilData.userInfos.lastName;
   const firstName = profilData.userInfos.firstName;
   const age = profilData.userInfos.age;
   const calorieCount = profilData.keyData.calorieCount;
   const proteinCount = profilData.keyData.proteinCount;
   const carbohydrateCount = profilData.keyData.carbohydrateCount;
   const lipidCount = profilData.keyData.lipidCount;
+  const lastName = profilData.userInfos.lastName;
 
   const profil = {
     id: profilData.id,
