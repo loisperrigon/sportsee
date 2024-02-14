@@ -1,15 +1,6 @@
 // Profil.js
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-//import Api from "../services/fakeApi.js";
-import Api from "../services/api.js";
-import {
-  formatActivityData,
-  formatAverageSessionsData,
-  formatPerformanceData,
-  formatProfilData,
-} from "../utils/dataFormatting.js";
+import React from "react";
+import useData from "../utils/useData.js";
 
 import Header from "../components/header/header.js";
 import GraphActiviteQuotidienne from "../components/modules/graphActiviteQuotidienne/graphActiviteQuotidienne.js";
@@ -33,44 +24,14 @@ const messageTrue = "Félicitation ! Vous avez explosé vos objectifs hier 👏"
 const messageFalse = "Ooooh non ! Vous n'avez pas réussi vos objectifs hier ";
 
 const Profil = () => {
-  const [data, setData] = useState(null);
-  const { id } = useParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const reponseProfil = await Api.getProfilData(`user/${id}`);
-        const reponseActivity = await Api.getProfilData(`user/${id}/activity`);
-        const reponsePerformance = await Api.getProfilData(
-          `user/${id}/performance`
-        );
-        const reponseAverageSessions = await Api.getProfilData(
-          `user/${id}/average-sessions`
-        );
-
-        setData({
-          profil: formatProfilData(reponseProfil.data),
-          activity: formatActivityData(reponseActivity.data),
-          performance: formatPerformanceData(reponsePerformance.data),
-          averageSessions: formatAverageSessionsData(
-            reponseAverageSessions.data
-          ),
-        });
-      } catch (error) {
-        // Gérer les erreurs
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    // Appeler la fonction fetchData
-    fetchData();
-  }, [id]);
+  const [data, error, messageError] = useData();
 
   return (
     <>
       <Header />
       <div className="sideBarProfil">
         <SideBar />
+        {error && <div>{messageError}</div>}
         {data && (
           <div className="profil">
             <div className="profil__welcome">
@@ -96,7 +57,7 @@ const Profil = () => {
                   )}
                   {data.performance && <GraphRadar data={data.performance} />}
                   {data.profil.todayScore && (
-                    <GraphObjectif data={data.profil?.todayScore} />
+                    <GraphObjectif data={data.profil.todayScore} />
                   )}
                 </div>
               </div>
