@@ -43,7 +43,6 @@ const renderTooltipContent = (data) => {
     );
   }
 
-  // Si data.payload est indéfini ou vide, afficher un message par défaut
   return <></>;
 };
 const renderLegend = () => {
