@@ -15,6 +15,7 @@ import srcCalories from "../assets/calories.png";
 import srcGlucide from "../assets/glucides.png";
 import srcLipide from "../assets/lipides.png";
 import srcProteine from "../assets/proteine.png";
+import ErreurSuccesData from "../components/modules/common/erreurSuccesData/erreurSuccesData.js";
 import "./profil.scss";
 
 const messageEncouragement = true;
@@ -32,22 +33,55 @@ const Profil = () => {
     messageError,
   ] = useData();
 
-  const [loading, setLoading] = useState(true); // État pour gérer le chargement initial
+  // État pour gérer le chargement initial
+  const [loading, setLoading] = useState({
+    page: true,
+    profil: true,
+    activity: true,
+    performance: true,
+    averageSessions: true,
+  });
+
+  const [erreur404, setErreur404] = useState(false);
 
   useEffect(() => {
-    if (profilData && activityData && performanceData && averageSessionsData) {
-      console.log(profilData);
-      setLoading(false); // Met à jour l'état de chargement une fois que TOUTE les données sont chargées
+    const changes = {
+      ...(profilData && { profil: false }),
+      ...(activityData && { activity: false }),
+      ...(averageSessionsData && { averageSessions: false }),
+      ...(performanceData && { performance: false }),
+    };
+
+    // Vérifier si des changements doivent être appliqués
+    if (Object.keys(changes).length > 0) {
+      changes.page = false; // Mettre à jour la clé `page` si nécessaire
+      // Appliquer tous les changements d'état en une seule mise à jour
+      setLoading((prevLoading) => ({ ...prevLoading, ...changes }));
     }
-  }, [profilData]); // Utilisez profilData comme dépendance pour l'effet
+
+    const isLoading =
+      loading.profil === false &&
+      loading.activity === false &&
+      loading.performance === false &&
+      loading.averageSessions === false;
+    const isVide =
+      profilData && activityData && averageSessionsData && performanceData;
+    if (isLoading && !isVide) {
+      setErreur404((prevLoading) => true);
+    }
+  }, [profilData, activityData, performanceData, averageSessionsData]);
 
   return (
     <>
       <Header />
       <div className="sideBarProfil">
         <SideBar />
-        {loading ? ( // Affiche le loader si les données sont en cours de chargement
+        {loading.page ? ( // Affiche le loader si les données sont en cours de chargement
           <Loader />
+        ) : erreur404 ? (
+          <div className="erreur404">
+            <p>ERREUR 404... </p>
+          </div>
         ) : (
           <div className="profil">
             <div className="profil__welcome">
@@ -63,18 +97,20 @@ const Profil = () => {
             </div>
             <div className="profil__informations">
               <div className="profil__informations__graphiques">
-                {activityData.sessions && (
+                <ErreurSuccesData loading={loading.activity}>
                   <GraphActiviteQuotidienne data={activityData.sessions} />
-                )}
+                </ErreurSuccesData>
 
                 <div className="profil__informations__graphiques__others">
-                  {averageSessionsData && (
+                  <ErreurSuccesData loading={loading.averageSessions}>
                     <GraphDureesSessions data={averageSessionsData} />
-                  )}
-                  {performanceData && <GraphRadar data={performanceData} />}
-                  {profilData.todayScore && (
+                  </ErreurSuccesData>
+                  <ErreurSuccesData loading={loading.performance}>
+                    <GraphRadar data={performanceData} />
+                  </ErreurSuccesData>
+                  <ErreurSuccesData loading={loading.profil}>
                     <GraphObjectif data={profilData.todayScore} />
-                  )}
+                  </ErreurSuccesData>
                 </div>
               </div>
               <div className="profil__informations__infoNutritionelles">

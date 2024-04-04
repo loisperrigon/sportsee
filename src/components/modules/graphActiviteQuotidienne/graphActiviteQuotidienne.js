@@ -40,11 +40,26 @@ const renderLegend = () => {
   );
 };
 
+const formatedX = (data) => {
+  return data.map((item, index) => ({
+    ...item,
+    index: index + 1,
+  }));
+};
+
 const GraphActiviteQuotidienne = ({ data }) => {
+  // Permet de rajouter les ordoonne commencant a 1
+  const formattedSessions = formatedX(data);
+
   return (
     <div className="graphActiviteQuotidienne">
-      <ResponsiveContainer width={"100%"}>
-        <BarChart height="400" data={data} maxBarSize={15} barGap={"-25%"}>
+      <ResponsiveContainer width={"100%"} height={300}>
+        <BarChart
+          height="400"
+          data={formattedSessions}
+          maxBarSize={15}
+          barGap={"-25%"}
+        >
           <XAxis dataKey="index" axisLine={false} tickLine={false} />
           <YAxis
             yAxisId="kilogram"

@@ -19,17 +19,30 @@ function useData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseProfil = await Api.getProfilData(`user/${id}`);
-        const responseActivity = await Api.getProfilData(`user/${id}/activity`);
-        const responsePerformance = await Api.getProfilData(
+        // Lancer toutes les requêtes en parallèle
+        const responseProfilPromise = Api.getProfilData(`user/${id}`);
+        const responseActivityPromise = Api.getProfilData(
+          `user/${id}/activity`
+        );
+        const responsePerformancePromise = Api.getProfilData(
           `user/${id}/performance`
         );
-        const responseAverageSessions = await Api.getProfilData(
+        const responseAverageSessionsPromise = Api.getProfilData(
           `user/${id}/average-sessions`
         );
 
-        setProfilData(formatedProfilData(responseProfil.data));
-        setActivityData(formatedActivityData(responseActivity.data));
+        // Attendre que toutes les promesses soient résolues
+        const responseProfil = await responseProfilPromise;
+        const responseActivity = await responseActivityPromise;
+        const responsePerformance = await responsePerformancePromise;
+        const responseAverageSessions = await responseAverageSessionsPromise;
+
+        // Traiter les données une fois qu'elles sont toutes disponibles
+        const profilData = formatedProfilData(responseProfil.data);
+        const activityData = formatedActivityData(responseActivity.data);
+
+        setProfilData(profilData);
+        setActivityData(activityData);
         setPerformanceData(responsePerformance.data);
         setAverageSessionsData(responseAverageSessions.data);
       } catch (error) {

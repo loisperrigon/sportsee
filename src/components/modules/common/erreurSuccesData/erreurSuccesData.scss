@@ -1,0 +1,11 @@
+.errorDataGraphique {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    text-align: center;
+    width: 300px;
+    color: red;
+  }
+}

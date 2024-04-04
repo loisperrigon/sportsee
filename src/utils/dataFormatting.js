@@ -15,7 +15,7 @@ export const formatedProfilData = (profilData) => {
     age: age || 0,
     todayScore:
       profilData.todayScore !== undefined
-        ? profilData.todayScore || 0
+        ? profilData.todayScore
         : profilData.score || 0,
     calorieCount: calorieCount || 0,
     proteinCount: proteinCount || 0,
@@ -27,11 +27,6 @@ export const formatedProfilData = (profilData) => {
 };
 
 export const formatedActivityData = (activityData) => {
-  //Permet de rajouter un index commencant a 1
-  activityData.sessions.map((item, index) => ({
-    ...item,
-    index: index + 1,
-  }));
   return activityData;
 };
 
