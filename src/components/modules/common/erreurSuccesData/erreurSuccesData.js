@@ -17,9 +17,7 @@ export default function ErreurSuccesData({ loading, children }) {
   ) : (
     <div className="errorDataGraphique">
       <div>
-        <p>
-          Erreur lors de la récupération des données de {children.type.name}
-        </p>
+        <p>Erreur lors de la récupération des données</p>
       </div>
     </div>
   );

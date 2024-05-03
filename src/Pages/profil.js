@@ -45,30 +45,21 @@ const Profil = () => {
   ]);
 
   useEffect(() => {
-    const profilDataVide = !!(
-      profilData.data && [Object.keys(profilData.data)].length
-    );
-    const activityDataVide = !!(
-      activityData.data && [Object.keys(activityData.data)].length
-    );
-    const performanceDataVide = !!(
-      performanceData.data && [Object.keys(performanceData.data)].length
-    );
-    const averageSessionsDataVide = !!(
-      averageSessionsData.data && [Object.keys(averageSessionsData.data)].length
-    );
+    const isDataPresent = [
+      profilData,
+      activityData,
+      performanceData,
+      averageSessionsData,
+    ].some((data) => data.data && Object.keys(data.data).length > 0); //permet de de verifier si au moins un des objet a des donnees
 
-    const isVide =
-      profilDataVide ||
-      activityDataVide ||
-      performanceDataVide ||
-      averageSessionsDataVide;
-    console.log(!isLoading, isVide);
-
-    if (!isLoading && !isVide) {
-      setErreur404(true);
-    }
-  }, [isLoading]);
+    setErreur404(!isLoading && !isDataPresent);
+  }, [
+    isLoading,
+    profilData,
+    activityData,
+    performanceData,
+    averageSessionsData,
+  ]);
 
   return (
     <>
