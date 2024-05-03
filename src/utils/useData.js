@@ -9,60 +9,59 @@ import Api from "../services/api.js";
 
 function useData() {
   const { id } = useParams();
-  const [profilData, setProfilData] = useState(null);
-  const [activityData, setActivityData] = useState(null);
-  const [performanceData, setPerformanceData] = useState(null);
-  const [averageSessionsData, setAverageSessionsData] = useState(null);
-  const [error, setError] = useState(false);
-  const [messageError, setMessageError] = useState("");
+  const [profilData, setProfilData] = useState({
+    data: undefined,
+    loading: true,
+  });
+  const [activityData, setActivityData] = useState({
+    data: undefined,
+    loading: true,
+  });
+  const [performanceData, setPerformanceData] = useState({
+    data: undefined,
+    loading: true,
+  });
+  const [averageSessionsData, setAverageSessionsData] = useState({
+    data: undefined,
+    loading: true,
+  });
+
+  const fetchDataAndUpdateState = async (endpoint, setData, formatDataFn) => {
+    try {
+      const response = await Api.getProfilData(endpoint);
+      setData((prevData) => ({
+        ...prevData,
+        data: formatDataFn(response.data),
+        loading: false,
+      }));
+    } catch (error) {
+      console.error(`Failed to fetch data for ${endpoint}:`, error);
+      setData((prevData) => ({
+        ...prevData,
+        loading: false,
+      }));
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Lancer toutes les requêtes en parallèle
-        const responseProfilPromise = Api.getProfilData(`user/${id}`);
-        const responseActivityPromise = Api.getProfilData(
-          `user/${id}/activity`
-        );
-        const responsePerformancePromise = Api.getProfilData(
-          `user/${id}/performance`
-        );
-        const responseAverageSessionsPromise = Api.getProfilData(
-          `user/${id}/average-sessions`
-        );
-
-        // Attendre que toutes les promesses soient résolues
-        const responseProfil = await responseProfilPromise;
-        const responseActivity = await responseActivityPromise;
-        const responsePerformance = await responsePerformancePromise;
-        const responseAverageSessions = await responseAverageSessionsPromise;
-
-        // Traiter les données une fois qu'elles sont toutes disponibles
-        const profilData = formatedProfilData(responseProfil.data);
-        const activityData = formatedActivityData(responseActivity.data);
-
-        setProfilData(profilData);
-        setActivityData(activityData);
-        setPerformanceData(responsePerformance.data);
-        setAverageSessionsData(responseAverageSessions.data);
-      } catch (error) {
-        setError(true);
-        setMessageError(error.message);
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [id]); // Quand l'id change fetchData est rappele
-
-  return [
-    profilData,
-    activityData,
-    performanceData,
-    averageSessionsData,
-    error,
-    messageError,
-  ];
+    fetchDataAndUpdateState(`user/${id}`, setProfilData, formatedProfilData);
+    fetchDataAndUpdateState(
+      `user/${id}/activity`,
+      setActivityData,
+      formatedActivityData
+    );
+    fetchDataAndUpdateState(
+      `user/${id}/performance`,
+      setPerformanceData,
+      (data) => data
+    );
+    fetchDataAndUpdateState(
+      `user/${id}/average-sessions`,
+      setAverageSessionsData,
+      (data) => data
+    );
+  }, [id]); // Quand l'id change fetchData est rappelé
+  return [profilData, activityData, performanceData, averageSessionsData];
 }
 
 export default useData;
