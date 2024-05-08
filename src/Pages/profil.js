@@ -73,59 +73,61 @@ const Profil = () => {
             <p>ERREUR 404... </p>
           </div>
         ) : (
-          <div className="profil">
-            <div className="profil__welcome">
-              <div className="profil__welcome__name">
-                <h1>Bonjour,</h1>
-                <h1 className="profil__welcome__name--color">
-                  {profilData.firstName}
-                </h1>
-              </div>
-              <h2 className="profil__welcome__message">
-                {messageEncouragement ? messageTrue : messageFalse}
-              </h2>
-            </div>
-            <div className="profil__informations">
-              <div className="profil__informations__graphiques">
-                <ErreurSuccesData loading={activityData.loading}>
-                  <GraphActiviteQuotidienne
-                    data={activityData.data?.sessions}
-                  />
-                </ErreurSuccesData>
-
-                <div className="profil__informations__graphiques__others">
-                  <ErreurSuccesData loading={averageSessionsData.loading}>
-                    <GraphDureesSessions data={averageSessionsData.data} />
-                  </ErreurSuccesData>
-                  <ErreurSuccesData loading={performanceData.loading}>
-                    <GraphRadar data={performanceData.data} />
-                  </ErreurSuccesData>
-                  <ErreurSuccesData loading={profilData.loading}>
-                    <GraphObjectif data={profilData.data?.todayScore} />
-                  </ErreurSuccesData>
+          <div className="conteneur__profil">
+            <div className="profil">
+              <div className="profil__welcome">
+                <div className="profil__welcome__name">
+                  <h1>Bonjour,</h1>
+                  <h1 className="profil__welcome__name--color">
+                    {profilData.data?.firstName}
+                  </h1>
                 </div>
+                <h2 className="profil__welcome__message">
+                  {messageEncouragement ? messageTrue : messageFalse}
+                </h2>
               </div>
-              <div className="profil__informations__infoNutritionelles">
-                <InfoNutritionelle
-                  nameNutritionelle={"Calories"}
-                  src={srcCalories}
-                  quantite={profilData.data?.calorieCount}
-                />
-                <InfoNutritionelle
-                  nameNutritionelle={"Proteine"}
-                  src={srcProteine}
-                  quantite={profilData.data?.proteinCount}
-                />
-                <InfoNutritionelle
-                  nameNutritionelle={"Glucide"}
-                  src={srcGlucide}
-                  quantite={profilData.data?.carbohydrateCount}
-                />
-                <InfoNutritionelle
-                  nameNutritionelle={"Lipide"}
-                  src={srcLipide}
-                  quantite={profilData.data?.lipidCount}
-                />
+              <div className="profil__informations">
+                <div className="profil__informations__graphiques">
+                  <ErreurSuccesData loading={activityData.loading}>
+                    <GraphActiviteQuotidienne
+                      data={activityData.data?.sessions}
+                    />
+                  </ErreurSuccesData>
+
+                  <div className="profil__informations__graphiques__others">
+                    <ErreurSuccesData loading={averageSessionsData.loading}>
+                      <GraphDureesSessions data={averageSessionsData.data} />
+                    </ErreurSuccesData>
+                    <ErreurSuccesData loading={performanceData.loading}>
+                      <GraphRadar data={performanceData.data} />
+                    </ErreurSuccesData>
+                    <ErreurSuccesData loading={profilData.loading}>
+                      <GraphObjectif data={profilData.data?.todayScore} />
+                    </ErreurSuccesData>
+                  </div>
+                </div>
+                <div className="profil__informations__infoNutritionelles">
+                  <InfoNutritionelle
+                    nameNutritionelle={"Calories"}
+                    src={srcCalories}
+                    quantite={profilData.data?.calorieCount}
+                  />
+                  <InfoNutritionelle
+                    nameNutritionelle={"Proteine"}
+                    src={srcProteine}
+                    quantite={profilData.data?.proteinCount}
+                  />
+                  <InfoNutritionelle
+                    nameNutritionelle={"Glucide"}
+                    src={srcGlucide}
+                    quantite={profilData.data?.carbohydrateCount}
+                  />
+                  <InfoNutritionelle
+                    nameNutritionelle={"Lipide"}
+                    src={srcLipide}
+                    quantite={profilData.data?.lipidCount}
+                  />
+                </div>
               </div>
             </div>
           </div>

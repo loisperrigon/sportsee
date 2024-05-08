@@ -35,7 +35,9 @@ const fakeApi = {
       }
 
       if (data) {
-        return data;
+        return {
+          data: data,
+        };
       } else {
         return Promise.reject(`Data not found for user with ID ${userId}`);
       }

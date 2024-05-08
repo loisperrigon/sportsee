@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+//import Api from "../services/fakeApi.js";
+import Api from "../services/api.js";
 import {
   formatedActivityData,
   formatedProfilData,
 } from "../utils/dataFormatting.js";
-//import Api from "../services/fakeApi.js";
-import Api from "../services/api.js";
 
 function useData() {
   const { id } = useParams();
@@ -45,6 +45,7 @@ function useData() {
 
   useEffect(() => {
     fetchDataAndUpdateState(`user/${id}`, setProfilData, formatedProfilData);
+
     fetchDataAndUpdateState(
       `user/${id}/activity`,
       setActivityData,
@@ -61,6 +62,7 @@ function useData() {
       (data) => data
     );
   }, [id]); // Quand l'id change fetchData est rappelé
+
   return [profilData, activityData, performanceData, averageSessionsData];
 }
 

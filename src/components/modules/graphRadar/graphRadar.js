@@ -41,7 +41,6 @@ const GraphRadar = ({ data }) => {
       <ResponsiveContainer width="100%" minWidth={320}>
         <RadarChart outerRadius={90} data={transformedData} radius={150}>
           <PolarGrid radialLines={false} />
-          {/* Utilisation de la fonction personnalisée pour le rendu de l'axe des angles polaires */}
           <PolarAngleAxis
             dataKey="subject"
             stroke="none"

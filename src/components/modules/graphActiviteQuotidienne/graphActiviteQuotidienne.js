@@ -53,7 +53,7 @@ const GraphActiviteQuotidienne = ({ data }) => {
 
   return (
     <div className="graphActiviteQuotidienne">
-      <ResponsiveContainer width={"100%"} height={300}>
+      <ResponsiveContainer width={"100%"}>
         <BarChart
           height="400"
           data={formattedSessions}

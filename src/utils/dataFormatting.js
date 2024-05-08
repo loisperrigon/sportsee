@@ -1,4 +1,5 @@
 export const formatedProfilData = (profilData) => {
+  console.log(profilData);
   const firstName = profilData?.userInfos?.firstName;
   const lastName = profilData?.userInfos?.lastName;
   const age = profilData?.userInfos?.age;
