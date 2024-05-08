@@ -3,7 +3,7 @@
 
 .sideBarProfil {
   display: flex;
-  flex: 1;
+  height: 100%;
   flex-grow: 1;
 
   .erreur404 {
@@ -31,8 +31,7 @@
     flex: 1;
     box-sizing: border-box;
     max-width: 2400px;
-    height: 600px;
-    max-height: 1500px;
+    max-height: 1200px;
     flex-direction: column;
 
     &__welcome {
@@ -57,6 +56,8 @@
     &__informations {
       display: flex;
       flex-grow: 1;
+      height: 600px;
+      overflow: auto;
 
       &__graphiques {
         display: grid;
@@ -72,39 +73,16 @@
         &__others {
           display: flex;
           justify-content: space-between;
+          height: 420px;
           gap: 15px;
           overflow-y: hidden;
           overflow-x: auto;
           padding-bottom: 10px; /* Ajouter du padding autour du conteneur */
-
-          &::-webkit-scrollbar {
-            width: 10px; /* Largeur de la barre de défilement */
-            height: 0px;
-            border-radius: 5px; /* Coins arrondis */
-          }
-
-          &::-webkit-scrollbar-track {
-            border-radius: 5px;
-            background: transparent; /* Couleur de l'arrière-plan de la barre de défilement */
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: $frontName; /* Couleur de la poignée de la barre de défilement */
-
-            border-radius: 5px; /* Coins arrondis */
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background: $frontName;
-            cursor: pointer; /* Couleur de la poignée de la barre de défilement au survol */
-          }
-          &::-webkit-scrollbar {
-            height: 12px; /* Nouvelle hauteur de la barre de défilement */
-          }
         }
       }
 
       &__infoNutritionelles {
+        padding-top: 50px;
         display: flex;
         flex: 1;
         flex-direction: column;

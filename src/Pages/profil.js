@@ -86,7 +86,7 @@ const Profil = () => {
                   {messageEncouragement ? messageTrue : messageFalse}
                 </h2>
               </div>
-              <div className="profil__informations">
+              <div className="profil__informations scrollable">
                 <div className="profil__informations__graphiques">
                   <ErreurSuccesData loading={activityData.loading}>
                     <GraphActiviteQuotidienne
@@ -94,7 +94,7 @@ const Profil = () => {
                     />
                   </ErreurSuccesData>
 
-                  <div className="profil__informations__graphiques__others">
+                  <div className="profil__informations__graphiques__others scrollable">
                     <ErreurSuccesData loading={averageSessionsData.loading}>
                       <GraphDureesSessions data={averageSessionsData.data} />
                     </ErreurSuccesData>
