@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-//import Api from "../services/fakeApi.js";
-import Api from "../services/api.js";
+import Api from "../services/fakeApi.js";
+//import Api from "../services/api.js";
 import {
   formatedActivityData,
   formatedProfilData,
@@ -34,6 +34,11 @@ function useData() {
         data: formatDataFn(response.data),
         loading: false,
       }));
+
+      // setActivityData((prevData) => ({
+      //   ...prevData,
+      //   loading: true,
+      // }));
     } catch (error) {
       console.error(`Failed to fetch data for ${endpoint}:`, error);
       setData((prevData) => ({

@@ -9,6 +9,10 @@
   padding: 30px;
   gap: 20px;
 
+  @media (max-height: 900px) {
+    padding: 15px;
+  }
+
   img {
     width: 60px;
     height: 60px;

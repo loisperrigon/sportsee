@@ -32,9 +32,9 @@ const Profil = () => {
 
   useEffect(() => {
     setIsLoading(
-      profilData.loading ||
-        activityData.loading ||
-        performanceData.loading ||
+      profilData.loading &&
+        activityData.loading &&
+        performanceData.loading &&
         averageSessionsData.loading
     );
   }, [

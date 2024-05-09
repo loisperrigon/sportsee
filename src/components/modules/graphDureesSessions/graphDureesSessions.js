@@ -73,7 +73,7 @@ const GraphActiviteQuotidienne = ({ data }) => {
 
   return (
     <div className="dureeSessions">
-      <ResponsiveContainer width="100%" minWidth={300} height={400}>
+      <ResponsiveContainer width="100%" minWidth={300} height={280}>
         <LineChart
           data={formatedDataGraph}
           height="400"

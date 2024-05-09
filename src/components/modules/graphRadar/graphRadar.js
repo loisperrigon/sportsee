@@ -38,7 +38,7 @@ const GraphRadar = ({ data }) => {
 
   return (
     <div className="radar">
-      <ResponsiveContainer width="100%" minWidth={320} height={400}>
+      <ResponsiveContainer width="100%" minWidth={320} height={280}>
         <RadarChart outerRadius={90} data={transformedData} radius={150}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis

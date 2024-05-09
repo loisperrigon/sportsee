@@ -20,6 +20,10 @@
     justify-content: center;
     gap: 30px;
     cursor: pointer;
+
+    @media (max-height: 900px) {
+      gap: 20px;
+    }
   }
 
   small {
